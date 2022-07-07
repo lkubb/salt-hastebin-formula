@@ -1,0 +1,87 @@
+{
+  "template": "https://github.com/lkubb/salt-template-formula-compose",
+  "commit": "3bf116fca254f07ebcba5a30fcc5f071472ef84a",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "_extensions": [
+        "local_extensions.YAMLDumper"
+      ],
+      "_jinja2_env_vars": {
+        "block_start_string": "{!",
+        "block_end_string": "!}",
+        "variable_start_string": "{=",
+        "variable_end_string": "=}",
+        "comment_start_string": "{@",
+        "comment_end_string": "@}"
+      },
+      "name": "Haste",
+      "abbr": "haste",
+      "abbr_pysafe": "haste",
+      "project_name": "haste",
+      "containers": "haste,memcached,redis",
+      "git_username": "lkubb",
+      "_lookup": {
+        "containers": {
+          "haste": {},
+          "memcached": {
+            "image": "docker.io/library/memcached:latest",
+            "port": 11211
+          },
+          "redis": {
+            "image": "docker.io/library/redis:alpine",
+            "port": 6379
+          }
+        },
+        "paths": {
+          "data": "data",
+          "src": "src"
+        },
+        "repo": "https://github.com/toptal/haste-server"
+      },
+      "_settings": {
+        "config": {
+          "documents": [
+            "about=./about.md"
+          ],
+          "host": "0.0.0.0",
+          "key_length": 10,
+          "keygenerator_keyspace": null,
+          "keygenerator_type": "phonetic",
+          "logging": {
+            "colorize": true,
+            "level": "verbose",
+            "type": "Console"
+          },
+          "max_length": 400000,
+          "port": 7777,
+          "ratelimits": {
+            "normal_total_requests": 500,
+            "normal_every_milliseconds": 60000,
+            "whitelist_total_requests": null,
+            "whitelist_every_seconds": null,
+            "whitelist": [],
+            "blacklist_total_requests": null,
+            "blacklist_every_seconds": null,
+            "blacklist": []
+          },
+          "recompress_static_assets": true,
+          "static_max_age": 86400,
+          "storage": {
+            "db": 2,
+            "database_url": null,
+            "expire_seconds": 2592000,
+            "filepath": null,
+            "host": "memcached",
+            "password": null,
+            "port": null,
+            "type": "memcached",
+            "username": null
+          }
+        }
+      },
+      "_template": "https://github.com/lkubb/salt-template-formula-compose"
+    }
+  },
+  "directory": null
+}

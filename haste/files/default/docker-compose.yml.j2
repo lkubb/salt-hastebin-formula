@@ -1,0 +1,46 @@
+version: '3.0'
+services:
+  haste-server:
+    build: {{ haste.lookup.paths.src }}
+    env_file:
+      - {{ haste.lookup.paths.config_haste }}
+    ports:
+      - {{ haste.config.port }}:{{ haste.config.port }}
+{%- if "file" != haste.config.storage.type %}
+    depends_on:
+      - {{ haste.config.storage.type }}
+{%- else %}
+    volumes:
+      - {{ haste.lookup.paths.data or "haste-files" }}:{{ haste.config.storage.filepath }}
+{%-   if not haste.lookup.paths.data %}
+volumes:
+  haste-files:
+{%-   endif %}
+{%- endif %}
+
+{%- if "redis" == haste.config.storage.type %}
+
+  redis:
+    image: {{ haste.lookup.containers.redis.image }}
+    env_file:
+      - {{ haste.lookup.paths["config_redis"] }}
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - {{ haste.lookup.paths.data or "haste-redis" }}:/data
+    restart: unless-stopped
+    healthcheck:
+      test: redis-cli ping
+      interval: 30s
+      timeout: 5s
+      retries: 2
+{%-   if not haste.lookup.paths.data %}
+volumes:
+  haste-redis:
+{%-   endif %}
+
+{%- elif "memcached" == haste.config.storage.type %}
+
+  memcached:
+    image: {{ haste.lookup.containers.memcached.image }}
+    restart: unless-stopped
+{%- endif %}
