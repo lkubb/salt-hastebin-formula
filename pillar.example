@@ -10,28 +10,40 @@ haste:
       # Setting this to true might incur accidental data loss!
     remove_all_data_for_sure: false
   config:
+      # List of static documents to serve
     documents:
       - about=./about.md
     host: 0.0.0.0
     key_length: 10
     keygenerator_keyspace: null
+      # phonetic or random
     keygenerator_type: phonetic
     logging:
       colorize: true
       level: verbose
       type: Console
+      # maximum length of a paste
     max_length: 400000
     port: 7777
     ratelimits:
+        # Comma separated list of the clients which are in the blacklist pool
       blacklist: []
+        # By default client names in the blacklist will be subject to 0 requests
       blacklist_every_seconds: null
       blacklist_total_requests: null
+        # The timespan to allow the total requests for uncategorized users
       normal_every_milliseconds: 60000
+        # By default anyone uncategorized will be subject to 500 requests in the
+        # defined timespan
       normal_total_requests: 500
+        # List of the clients which are in the whitelist pool
       whitelist: []
+        # By default client names in the whitelist will not have their requests limited
       whitelist_every_seconds: null
       whitelist_total_requests: null
+      # compile static js assets
     recompress_static_assets: true
+      # max age for static assets
     static_max_age: 86400
     storage:
       database_url: null
@@ -41,6 +53,10 @@ haste:
       host: memcached
       password: null
       port: null
+        # memcached, redis, postgres, rethinkdb, amazon-s3, file
+        # This formula currently supports memcached, redis (and file)
+        # Setting this will automatically set the other values accordingly
+        # Redis allows to make the data persistent across service restarts
       type: memcached
       username: null
 
