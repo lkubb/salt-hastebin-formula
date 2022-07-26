@@ -22,6 +22,8 @@ Haste user session is initialized at boot:
   compose.lingering_managed:
     - name: {{ haste.lookup.user.name }}
     - enable: {{ haste.install.rootless }}
+    - require:
+      - user: {{ haste.lookup.user.name }}
 
 Haste paths are present:
   file.directory:

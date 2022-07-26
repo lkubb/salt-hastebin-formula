@@ -17,6 +17,7 @@ haste:
         ephemeral: true
         pod_prefix: null
         restart_policy: on-failure
+        restart_sec: 2
         separator: null
         stop_timeout: null
     paths:
@@ -33,6 +34,7 @@ haste:
       name: haste
       shell: /usr/sbin/nologin
       uid: null
+      gid: null
     containers:
       haste: {}
       memcached:

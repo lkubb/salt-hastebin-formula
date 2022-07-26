@@ -35,6 +35,9 @@ Haste user session is not initialized at boot:
   compose.lingering_managed:
     - name: {{ haste.lookup.user.name }}
     - enable: false
+    - onlyif:
+      - fun: user.info
+        name: {{ haste.lookup.user.name }}
 
 Haste user account is absent:
   user.absent:
@@ -42,6 +45,9 @@ Haste user account is absent:
     - purge: {{ haste.install.remove_all_data_for_sure }}
     - require:
       - Haste is absent
+    - retry:
+        attempts: 5
+        interval: 2
 
 {%- if haste.install.remove_all_data_for_sure %}
 
