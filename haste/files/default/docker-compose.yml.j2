@@ -6,6 +6,10 @@ services:
       - {{ haste.lookup.paths.config_haste }}
     ports:
       - {{ haste.config.port }}:{{ haste.config.port }}
+{%- if haste.install.autoupdate %}
+    labels:
+      - io.containers.autoupdate=registry
+{%- endif %}
 {%- if "file" != haste.config.storage.type %}
     depends_on:
       - {{ haste.config.storage.type }}
@@ -33,6 +37,10 @@ volumes:
       interval: 30s
       timeout: 5s
       retries: 2
+{%-   if haste.install.autoupdate %}
+    labels:
+      - io.containers.autoupdate=registry
+{%-   endif %}
 {%-   if not haste.lookup.paths.data %}
 volumes:
   haste-redis:
@@ -43,4 +51,8 @@ volumes:
   memcached:
     image: {{ haste.lookup.containers.memcached.image }}
     restart: unless-stopped
+{%-   if haste.install.autoupdate %}
+    labels:
+      - io.containers.autoupdate=registry
+{%-   endif %}
 {%- endif %}

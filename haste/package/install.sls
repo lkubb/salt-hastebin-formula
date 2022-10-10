@@ -78,3 +78,15 @@ Haste is installed:
     - require:
       - user: {{ haste.lookup.user.name }}
 {%- endif %}
+
+{%- if haste.install.autoupdate_service is not none %}
+
+Podman autoupdate service is managed for Haste:
+{%-   if haste.install.rootless %}
+  compose.systemd_service_{{ "enabled" if haste.install.autoupdate_service else "disabled" }}:
+    - user: {{ haste.lookup.user.name }}
+{%-   else %}
+  service.{{ "enabled" if haste.install.autoupdate_service else "disabled" }}:
+{%-   endif %}
+    - name: podman-auto-update.timer
+{%- endif %}

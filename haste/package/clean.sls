@@ -8,6 +8,18 @@
 include:
   - {{ sls_config_clean }}
 
+{%- if haste.install.autoupdate_service %}
+
+Podman autoupdate service is disabled for Haste:
+{%-   if haste.install.rootless %}
+  compose.systemd_service_disabled:
+    - user: {{ haste.lookup.user.name }}
+{%-   else %}
+  service.disabled:
+{%-   endif %}
+    - name: podman-auto-update.timer
+{%- endif %}
+
 Haste is absent:
   compose.removed:
     - name: {{ haste.lookup.paths.compose }}
