@@ -22,6 +22,9 @@
       "containers": "haste,memcached,redis",
       "git_username": "lkubb",
       "_lookup": {
+        "compose": {
+          "build": true
+        },
         "containers": {
           "haste": {},
           "memcached": {
