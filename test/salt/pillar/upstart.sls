@@ -12,6 +12,8 @@ haste:
       pod_args: null
       project_name: haste
       remove_orphans: true
+      build: false
+      build_args: null
       service:
         container_prefix: null
         ephemeral: true
