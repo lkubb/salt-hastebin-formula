@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
 haste:
@@ -12,7 +11,7 @@ haste:
       pod_args: null
       project_name: haste
       remove_orphans: true
-      build: True
+      build: true
       build_args: null
       pull: false
       service:
@@ -52,6 +51,7 @@ haste:
     autoupdate: true
     autoupdate_service: false
     remove_all_data_for_sure: false
+    podman_api: true
   config:
     documents:
       - about=./about.md

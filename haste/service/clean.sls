@@ -1,7 +1,12 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+
+{#-
+    Stops the haste, memcached, redis container services
+    and disables them at boot time.
+#}
+
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as haste with context %}
 
 haste service is dead:

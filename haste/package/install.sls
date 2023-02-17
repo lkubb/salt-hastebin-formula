@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as haste with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
@@ -35,6 +34,23 @@ Haste paths are present:
     - require:
       - user: {{ haste.lookup.user.name }}
 
+{%- if haste.install.podman_api %}
+
+Haste podman API is enabled:
+  compose.systemd_service_enabled:
+    - name: podman
+    - user: {{ haste.lookup.user.name }}
+    - require:
+      - Haste user session is initialized at boot
+
+Haste podman API is available:
+  compose.systemd_service_running:
+    - name: podman
+    - user: {{ haste.lookup.user.name }}
+    - require:
+      - Haste user session is initialized at boot
+{%- endif %}
+
 Haste repo is present:
   git.latest:
     - name: {{ haste.lookup.repo }}
@@ -44,8 +60,8 @@ Haste repo is present:
 Haste compose file is managed:
   file.managed:
     - name: {{ haste.lookup.paths.compose }}
-    - source: {{ files_switch(['docker-compose.yml', 'docker-compose.yml.j2'],
-                              lookup='Haste compose file is present'
+    - source: {{ files_switch(["docker-compose.yml", "docker-compose.yml.j2"],
+                              lookup="Haste compose file is present"
                  )
               }}
     - mode: '0644'
