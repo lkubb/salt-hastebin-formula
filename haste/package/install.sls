@@ -38,14 +38,14 @@ Haste paths are present:
 
 Haste podman API is enabled:
   compose.systemd_service_enabled:
-    - name: podman
+    - name: podman.socket
     - user: {{ haste.lookup.user.name }}
     - require:
       - Haste user session is initialized at boot
 
 Haste podman API is available:
   compose.systemd_service_running:
-    - name: podman
+    - name: podman.socket
     - user: {{ haste.lookup.user.name }}
     - require:
       - Haste user session is initialized at boot

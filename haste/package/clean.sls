@@ -53,7 +53,7 @@ Haste compose file/repo is absent:
 
 Haste podman API is unavailable:
   compose.systemd_service_dead:
-    - name: podman
+    - name: podman.socket
     - user: {{ haste.lookup.user.name }}
     - onlyif:
       - fun: user.info
@@ -61,7 +61,7 @@ Haste podman API is unavailable:
 
 Haste podman API is disabled:
   compose.systemd_service_disabled:
-    - name: podman
+    - name: podman.socket
     - user: {{ haste.lookup.user.name }}
     - onlyif:
       - fun: user.info
