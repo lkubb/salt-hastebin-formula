@@ -2,7 +2,7 @@
 
 {%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as haste with context %}
-{%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
+{%- from tplroot ~ "/libtofsstack.jinja" import files_switch with context %}
 
 Haste user account is present:
   user.present:
@@ -60,14 +60,16 @@ Haste repo is present:
 Haste compose file is managed:
   file.managed:
     - name: {{ haste.lookup.paths.compose }}
-    - source: {{ files_switch(["docker-compose.yml", "docker-compose.yml.j2"],
-                              lookup="Haste compose file is present"
+    - source: {{ files_switch(
+                    ["docker-compose.yml", "docker-compose.yml.j2"],
+                    config=haste,
+                    lookup="Haste compose file is present",
                  )
               }}
     - mode: '0644'
     - user: root
     - group: {{ haste.lookup.rootgroup }}
-    - makedirs: True
+    - makedirs: true
     - template: jinja
     - makedirs: true
     - context:

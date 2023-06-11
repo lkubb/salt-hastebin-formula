@@ -1,6 +1,5 @@
 # vim: ft=sls
 
-
 {#-
     Stops the haste, memcached, redis container services
     and disables them at boot time.
