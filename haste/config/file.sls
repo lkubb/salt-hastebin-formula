@@ -45,7 +45,7 @@ Haste environment files are managed:
     - template: jinja
     - require:
       - user: {{ haste.lookup.user.name }}
-    - watch_in:
+    - require_in:
       - Haste is installed
     - context:
         haste: {{ haste | json }}

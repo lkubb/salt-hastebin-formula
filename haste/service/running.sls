@@ -34,3 +34,4 @@ Haste service is running:
 {%- endif %}
     - watch:
       - Haste is installed
+      - sls: {{ sls_config_file }}
