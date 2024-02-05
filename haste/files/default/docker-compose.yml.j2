@@ -6,10 +6,6 @@ services:
       - {{ haste.lookup.paths.config_haste }}
     ports:
       - {{ haste.config.port }}:{{ haste.config.port }}
-{%- if haste.install.autoupdate %}
-    labels:
-      - io.containers.autoupdate=registry
-{%- endif %}
 {%- if "file" != haste.config.storage.type %}
     depends_on:
       - {{ haste.config.storage.type }}
